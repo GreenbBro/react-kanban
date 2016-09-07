@@ -124,13 +124,20 @@ exports.setupCSS = function(paths) {
   return {
     module: {
       loaders: [
-        {
+        /*{
           test: /\.css$/,
           loaders: ['style', 'css'],
           include: paths
+        }*/
+        {
+          test: /\.css$/,
+          loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
         }
       ]
-    }
+    },
+    plugins: [
+      new ExtractTextPlugin('[name].[chunkhash].css')
+    ]
   };
 }
 

@@ -3,7 +3,10 @@ import classnames from 'classnames';
 
 export default ({editing, value, onEdit, className, ...props}) => {
     if(editing) {
+        console.log('editing');
         return <Edit className={className} value={value} onEdit={onEdit} {...props} />;
+    } else {
+        console.log('not editing');
     }
     return <span className={classnames('value', className)} {...props}>{value}</span>;
 }
