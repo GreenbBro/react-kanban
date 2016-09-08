@@ -1,5 +1,5 @@
 .notes {
-  margin: 0.5em;
+  margin: 10px 0;
   padding-left: 0;
 
   max-width: 30em;
@@ -14,6 +14,7 @@
 
   background-color: #fdfdfd;
   box-shadow: 0 0 0.3em .03em rgba(0,0,0,.3);
+  min-width: 150px;
 }
 .note:hover {
   box-shadow: 0 0 0.3em .03em rgba(0,0,0,.7);
@@ -24,6 +25,7 @@
 .note .value {
   /* force to use inline-block so that it gets minimum height */
   display: inline-block;
+  vertical-align: top;
 }
 
 .note .editable {
