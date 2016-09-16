@@ -5,7 +5,18 @@ import axios from 'axios';
 export default class PostStore {
     constructor(){
         this.bindActions(PostActions);
+        this.posts = [];
+        this.bindListeners({
+            handleUpdatePosts: PostActions.update,
+            handleFetchPosts: PostActions.fetch
+        });
+    }
 
+    handleUpdatePosts(posts){
+        this.posts = posts;
+    }
+
+    handleFetchPosts(){
         this.posts = [];
     }
 
@@ -24,18 +35,14 @@ export default class PostStore {
     }
 
     fetch(){
-        const self = this;
-        //exp
-        axios.get('http://jsonplaceholder.typicode.com/posts').then(function(response){
-            console.log('fetched');
-            self.setState({
-                posts: self.posts.concat(response.data)
+        return (dispatch) => {
+            dispatch();
+            axios.get('http://jsonplaceholder.typicode.com/posts').then(function(response){
+                this.update(response.data);
+            }).catch(function(error){
+                console.log('error occured ', error);
             });
-            console.log(self.posts);
-        }).catch(function(error){
-            console.log('error occured ', error);
-        });
-        //exp
+        }
     }
 
 }

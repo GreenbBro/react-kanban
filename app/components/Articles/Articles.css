@@ -1,0 +1,16 @@
+.articles {
+    list-style-type: none;
+    padding: 0;
+    display: table;
+    font-size: 12px;
+    width: 100%;
+    border-collapse: collapse;
+}
+.article {
+    border: 1px dotted #ccc;
+    display: table-row;
+}
+.article div {
+    padding: 10px;
+    display: table-cell;
+}

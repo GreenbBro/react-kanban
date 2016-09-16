@@ -97,7 +97,13 @@ exports.devServer = function(options) {
       // 0.0.0.0 is available to all network devices
       // unlike default `localhost`.
       host: options.host, // Defaults to `localhost`
-      port: options.port // Defaults to 8080
+      port: options.port, // Defaults to 8080
+      proxy: {
+        '/api': {
+          target: 'http://tass24.dev/api/news/lenta?limit=50',
+          pathRewrite: {'^/api' : ''}
+        }
+      }
     },
     plugins: [
       // Enable multi-pass compilation for enhanced performance
@@ -195,7 +201,23 @@ exports.clean = function(path) {
 }
 
 exports.extractCSS = function(paths) {
+
   return {
+    module: {
+      loaders: [
+        {
+          test: /\.css$/,
+          loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
+        }
+      ]
+    },
+    plugins: [
+      new ExtractTextPlugin('[name].[chunkhash].css')
+    ]
+  };
+
+
+  /*return {
     module: {
       loaders: [
         // Extract CSS during build
@@ -210,7 +232,7 @@ exports.extractCSS = function(paths) {
       // Output extracted CSS to a file
       new ExtractTextPlugin('[name].[chunkhash].css')
     ]
-  };
+  };*/
 }
 
 exports.npmInstall = function(options) {

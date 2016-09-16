@@ -8,6 +8,7 @@ import Lanes from './Lanes/Lanes';
 import LaneActions from '../actions/LaneActions';
 import Posts from './Posts/Posts';
 import PostActions from '../actions/PostActions';
+import Articles from './Articles/Articles';
 
 const App = ({LaneActions, lanes, PostActions, posts}) => {
     const addLane = () => {
@@ -22,6 +23,7 @@ const App = ({LaneActions, lanes, PostActions, posts}) => {
             <button className="add-lane" onClick={addLane}>Add lane</button>
             <Lanes lanes={lanes} />
             <Posts posts={posts} />
+            <Articles />
         </div>
     );
 };

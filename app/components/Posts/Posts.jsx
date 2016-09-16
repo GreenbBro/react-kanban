@@ -1,29 +1,10 @@
 import React from 'react';
-import connect from '../../libs/connect';
-import PostActions from '../../actions/PostActions';
+import Post from '../Post/Post';
 
-const Posts = ({
-    posts, PostActions, ...props
-}) => {
-
-    return (
-        <div className="posts">
-            {
-                posts.map(
-                    ({id, title}) => 
-                    <li key={id}>
-                        {title}
-                    </li>
-                )
-            }
-        </div>
-    );
-};
-
-export default connect(
-    ({posts}) => ({
-        posts
-    }), {
-        PostActions
-    }
-)(Posts)
+export default ({posts}) => (
+    <div className="posts">
+        {posts.map(post =>
+            <Post className="post" key={post.id} post={post} />
+        )}
+    </div>
+)
